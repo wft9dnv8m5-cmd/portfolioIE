@@ -32,99 +32,87 @@ header{position:relative;z-index:30;display:flex;align-items:center;justify-cont
 .logo:hover { color: var(--lime); text-shadow: 0 0 15px rgba(204,255,0,0.5); }
 .logo:hover span { color: var(--lime); transition: color 0.3s; }
 
-/* ЦЕНТРАЛЬНАЯ НАВИГАЦИЯ С ПОДСВЕТКОЙ */
-nav{display:none;} /* Скрыто на мобилках */
+/* РАЗДЕЛЕННЫЕ И УВЕЛИЧЕННЫЕ ВКЛАДКИ НАВИГАЦИИ */
+nav{display:none;}
 @media(min-width:850px){
   nav{
     display:flex;
     align-items:center;
-    gap: 32px;
+    gap: 16px; /* Расстояние между вкладками */
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.03);
-    padding: 12px 32px;
-    border-radius: 100px;
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), inset 0 0 20px rgba(255,255,255,0.02);
   }
 }
-nav .lnk{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted); transition: all 0.3s ease;}
+nav .lnk{
+  font-family:var(--mono);
+  font-size: 14px; /* Увеличенный шрифт */
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05); /* Отдельные кнопки */
+  padding: 12px 28px; /* Широкие вкладки */
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
 nav .lnk:hover{
-  color: var(--lime);
-  text-shadow: 0 0 10px var(--lime), 0 0 20px rgba(204,255,0,0.4); /* Эффект свечения */
-  transform: translateY(-2px);
+  background: var(--lime);
+  color: #000;
+  border-color: var(--lime);
+  box-shadow: 0 0 20px rgba(204,255,0,0.4);
+  transform: translateY(-3px);
 }
 
-/* КНОПКА СВЯЗИ (Справа) */
+/* КНОПКА СВЯЗИ */
 .header-cta { position: relative; z-index: 10; }
-.cta{background:var(--lime);color:#000;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:12px 24px;border-radius:999px;transition:all .3s ease; box-shadow: 0 0 15px rgba(204,255,0,0.2);}
+.cta{background:var(--lime);color:#000;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:12px 24px;border-radius:12px;transition:all .3s ease; box-shadow: 0 0 15px rgba(204,255,0,0.2);}
 .cta:hover{transform:scale(1.05) translateY(-2px); box-shadow: 0 10px 25px rgba(204,255,0,0.4);}
 
-main{position:relative;z-index:20;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 16px 4vh}
+main{position:relative;z-index:20;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;padding:12vh 16px 0}
 h1{font-family:var(--display);font-weight:700;text-transform:uppercase;line-height:.9; pointer-events:none;}
 .t1{display:block;color:transparent;-webkit-text-stroke:1px #fff;font-size:clamp(17px,5.4vw,70px);letter-spacing:.06em}
 @media(min-width:1024px){.t1{-webkit-text-stroke:2px #fff}}
-/* Светящийся главный текст */
-.t2{display:block;color:var(--lime);font-size:clamp(50px,15vw,180px);min-height:.95em;margin-top:.08em; text-shadow: 0 0 40px rgba(204,255,0,0.3), 0 0 80px rgba(204,255,0,0.1);}
+/* Светящийся текст имени */
+.t2{display:block;color:var(--lime);font-size:clamp(40px,11vw,140px);min-height:.95em;margin-top:.08em; text-shadow: 0 0 40px rgba(204,255,0,0.3), 0 0 80px rgba(204,255,0,0.1);}
 
-/* БЛОК С ФОТО (Интересные эффекты) */
-.hero{position:absolute;z-index:10;left:50%;top:50%;transform:translate(-50%,-50%);height:62%;max-width:100%;pointer-events:none;-webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 30%,rgba(0,0,0,.55) 60%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 30%,rgba(0,0,0,.55) 60%,transparent 100%)}
+/* БЛОК С ФОТО */
+.hero{position:absolute;z-index:10;left:50%;top:50%;transform:translate(-50%,-50%);height:65%;max-width:100%;pointer-events:none;-webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 30%,rgba(0,0,0,.55) 60%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 30%,rgba(0,0,0,.55) 60%,transparent 100%)}
 @media(min-width:1024px){.hero{height:78%}}
-
-/* Эффект левитации для фото */
 .hero img{display:block;height:100%;width:auto;max-width:100vw;object-fit:contain;opacity:0.95; filter:brightness(0.95) contrast(1.1); animation: float 6s ease-in-out infinite;}
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-}
 
-/* Эффект голографического сканера */
+/* Эффекты */
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 .hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
+  content: ""; position: absolute; inset: 0;
   background: linear-gradient(to bottom, transparent 40%, rgba(204, 255, 0, 0.15) 50%, transparent 60%);
-  background-size: 100% 250%;
-  animation: scan 5s linear infinite;
-  mix-blend-mode: overlay;
-  pointer-events: none;
+  background-size: 100% 250%; animation: scan 5s linear infinite; mix-blend-mode: overlay; pointer-events: none;
 }
-@keyframes scan {
-  0% { background-position: 0 -100%; }
-  100% { background-position: 0 200%; }
-}
+@keyframes scan { 0% { background-position: 0 -100%; } 100% { background-position: 0 200%; } }
 
-/* ИНФОРМАЦИОННАЯ КАРТОЧКА СПРАВА */
-.hero-info {
+/* ГЛАВНЫЙ ИНФОРМАЦИОННЫЙ БЛОК (По центру внизу) */
+.main-info {
   position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translate(120%, -50%);
-  background: rgba(3, 0, 20, 0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-left: 2px solid var(--lime);
-  padding: 16px 20px;
-  text-align: left;
-  font-family: var(--mono);
-  display: none;
-  min-width: max-content;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-  animation: float-delayed 6s ease-in-out infinite; /* Парит вместе с фото, но с задержкой */
+  bottom: 12vh;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(3, 0, 20, 0.75);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 2px solid var(--lime);
+  padding: 24px 32px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 650px;
+  text-align: center;
+  z-index: 35;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6), inset 0 1px 15px rgba(255,255,255,0.03);
 }
-@keyframes float-delayed {
-  0%, 100% { transform: translate(120%, -50%); }
-  50% { transform: translate(120%, calc(-50% - 10px)); }
-}
-@media(min-width: 950px) {
-  .hero-info { display: block; }
-}
-.hero-info .tag { color: var(--muted); font-size: 11px; margin-bottom: 8px; letter-spacing: 0.1em; }
-.hero-info h4 { font-family: var(--sans); font-size: 16px; font-weight: 600; color: #fff; line-height: 1.4;}
-.hero-info p { font-size: 13px; color: var(--muted); margin-top: 4px; }
-.hero-info .hl { color: var(--lime); text-shadow: 0 0 8px rgba(204,255,0,0.5); }
+.main-info .tag { color: var(--lime); font-family: var(--mono); font-size: 13px; letter-spacing: 0.15em; margin-bottom: 16px; display: block; }
+.main-info p { font-size: 16px; color: var(--muted); margin-bottom: 10px; line-height: 1.5; font-family: var(--sans); }
+.main-info span { color: #fff; font-weight: 600; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+.main-info .hl { color: var(--lime); font-weight: 600; text-shadow: 0 0 10px rgba(204,255,0,0.4); }
 
 #mono{display:none;font-family:var(--display);font-weight:700;font-size:min(62vh,80vw);line-height:.8;letter-spacing:-.02em;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.12);white-space:nowrap;padding-bottom:4vh;user-select:none}
 .marq{position:absolute;z-index:30;left:0;right:0;bottom:0;overflow:hidden;white-space:nowrap;pointer-events:none;padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -145,11 +133,11 @@ aside.on{transform:none;visibility:visible}
 .rh{font-family:var(--display);font-weight:500;font-size:22px;text-transform:uppercase;letter-spacing:.04em;color:var(--lime);margin:26px 0 8px}
 .db p a{color:var(--lime)}
 #st{margin:0;font-size:14px;color:var(--muted)}
-.card{display:block;text-decoration:none;border:1px solid rgba(255,255,255,.15);padding:20px;margin-bottom:16px;transition:all .3s}
+.card{display:block;text-decoration:none;border:1px solid rgba(255,255,255,.15);padding:20px;margin-bottom:16px;transition:all .3s; border-radius: 8px;}
 .card:hover{border-color:var(--lime); box-shadow: 0 0 20px rgba(204,255,0,0.1);}
 .card h3{font-family:var(--display);font-size:26px;text-transform:uppercase;margin-bottom:8px}
 .card p{margin:0 0 12px;color:var(--muted)}
-.tag{font-family:var(--mono);font-size:12px;color:var(--lime)}
+.tag-c{font-family:var(--mono);font-size:12px;color:var(--lime)}
 .row{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1)}
 .row b{font-family:var(--mono);font-weight:400;font-size:12px;color:var(--muted);min-width:96px;padding-top:3px}
 form{display:grid;gap:22px;margin-top:8px}
@@ -158,48 +146,49 @@ input,textarea,select{width:100%;background:transparent;color:#fff;border:0;bord
 input:focus,textarea:focus,select:focus{border-color:var(--lime)}
 textarea{resize:vertical;min-height:96px}
 select option{background:var(--drawer)}
-form .cta{padding:16px;font-size:13px;border-radius:0}
-@media(prefers-reduced-motion:reduce){.marq div{animation:none}aside{transition:none}.logo i{transition:none} .hero img, .hero-info, .hero::after {animation:none;}}
+form .cta{padding:16px;font-size:13px;border-radius:12px}
+@media(prefers-reduced-motion:reduce){.marq div{animation:none}aside{transition:none}.logo i{transition:none} .hero img, .hero::after {animation:none;}}
 </style>
 </head>
 <body>
 <div id="app">
   <canvas id="bg" aria-hidden="true"></canvas>
   <header>
-    <!-- Логотип слева -->
+    <!-- Логотип -->
     <a class="logo" href="#" aria-label="Эмиль Исиев">
       <span>&lt;I/E&gt;</span><i aria-hidden="true">_</i>
     </a>
     
-    <!-- Навигация по центру -->
+    <!-- Разделенные вкладки по центру -->
     <nav>
       <button class="lnk" data-open="projects">Портфолио</button>
       <button class="lnk" data-open="resume">Резюме</button>
       <button class="lnk" data-open="about">Обо мне</button>
     </nav>
 
-    <!-- Кнопка справа (на мобилках открывает меню) -->
+    <!-- Кнопка связи -->
     <div class="header-cta">
       <button class="cta" data-open="menu" aria-haspopup="dialog">Связаться</button>
     </div>
   </header>
 
   <main>
-    <h1><span class="t1">Привет, я Эмиль. Я</span><span class="t2" id="word" aria-live="off">СТАРОСТА</span></h1>
+    <!-- Обновленный заголовок -->
+    <h1><span class="t1">Привет, я</span><span class="t2" id="word" aria-live="off">ИСИЕВ ЭМИЛЬ</span></h1>
   </main>
 
+  <!-- Блок с фото -->
   <div class="hero">
-    <!-- Твоё фото -->
     <img src="telegram-cloud-photo-size-2-5220104291400490716-y.jpg" alt="Эмиль Исиев" onerror="this.style.display='none';document.getElementById('mono').style.display='block'">
     <div id="mono" aria-hidden="true">ЭИ</div>
-    
-    <!-- Инфо-карточка -->
-    <div class="hero-info">
-      <div class="tag">/* ОБРАЗОВАНИЕ */</div>
-      <h4>МГТУ им. Баумана</h4>
-      <p>Факультет <span class="hl">ИБМ</span></p>
-      <p>Студент & Староста</p>
-    </div>
+  </div>
+
+  <!-- Большой информационный блок по центру экрана -->
+  <div class="main-info">
+    <span class="tag">/* ПРОФАЙЛ */</span>
+    <p>Студент <span>3 курса</span> МГТУ им. Баумана (Факультет <span>ИБМ</span>).</p>
+    <p>Староста группы и основатель студенческого сообщества на 360 человек.</p>
+    <p>В поиске стажировки в <span class="hl">отделе закупок</span>.</p>
   </div>
 
   <div class="marq" aria-hidden="true"><div id="mq"></div></div>
@@ -218,23 +207,26 @@ const EMAIL = "isievemil@gmail.com";
 const TG = "qwerlode";
 const FORM_KEY = "";
 const STAROSTATT = "https://wft9dnv8m5-cmd.github.io/StaroSTATT/";
-const WORDS = ["СТАРОСТА","МОНТАЖЁР","СТАЖЁР","ВАЙБКОДЕР"];
+// Переключение языков
+const WORDS = ["ИСИЕВ ЭМИЛЬ","ISIEV EMIL"];
 
 /* ---------- Бегущая строка ---------- */
 const unit = "ЭМИЛЬ ИСИЕВ // МГТУ ИМ. БАУМАНА // ИБМ // ";
 document.getElementById("mq").textContent = unit.repeat(6);
 
 /* ---------- Scramble ---------- */
-const word = document.getElementById("word"), CH = "АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЭЮЯ";
+const word = document.getElementById("word");
+// Добавил английские буквы для правильной анимации ISIEV EMIL
+const CH = "АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЭЮЯABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let wi = 0, timer;
 function scramble(target){
   clearInterval(timer); let f = 0;
   timer = setInterval(()=>{
-    word.textContent = [...target].map((c,i)=> i < f/3 ? c : CH[Math.floor(Math.random()*CH.length)]).join("");
+    word.textContent = [...target].map((c,i)=> i < f/3 ? c : (c === " " ? " " : CH[Math.floor(Math.random()*CH.length)])).join("");
     if(++f > target.length*3){ clearInterval(timer); word.textContent = target; }
   }, 40);
 }
-setInterval(()=>{ wi=(wi+1)%WORDS.length; scramble(WORDS[wi]); }, 4000);
+setInterval(()=>{ wi=(wi+1)%WORDS.length; scramble(WORDS[wi]); }, 5000);
 
 /* ---------- Drawer ---------- */
 const drawer = document.getElementById("drawer"), veil = document.getElementById("veil"),
@@ -247,7 +239,7 @@ const V = {
     <a class="card" href="${STAROSTATT}" target="_blank" rel="noopener">
       <h3>StaroSTATT</h3>
       <p>Веб-приложение для старост: журнал посещаемости и смотр куратору в одном окне. Один HTML-файл, вход через Firebase Auth, данные в Firestore.</p>
-      <span class="tag">Открыть сайт ↗</span></a>`,
+      <span class="tag-c">Открыть сайт ↗</span></a>`,
   about: `<h2>Обо мне</h2>
     <p>Меня зовут Эмиль Исиев. Я учусь на 3 курсе факультета «Инженерный бизнес и менеджмент» в МГТУ им. Баумана и веду свою группу как староста.</p>
     <p>Основал студенческое сообщество на 360 человек, поэтому знаю, как собрать людей и довести дело до результата. Сам собрал StaroSTATT, чтобы старостам было проще вести группу. В свободное время монтирую видео.</p>

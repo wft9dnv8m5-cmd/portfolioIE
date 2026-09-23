@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Эмиль Исиев — портфолио</title>
-<meta name="description" content="Эмиль Исиев, студент МГТУ им. Баумана (ИБМ), староста и организатор. Ищет стажировку в отделе закупок.">
+<meta name="description" content="Эмиль Исиев, студент МГТУ им. Баумана (ИБМ), староста и организатор.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap&subset=cyrillic" rel="stylesheet">
@@ -38,7 +38,7 @@ nav{display:none;}
   nav{
     display:flex;
     align-items:center;
-    gap: 16px; /* Расстояние между вкладками */
+    gap: 16px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -46,12 +46,12 @@ nav{display:none;}
 }
 nav .lnk{
   font-family:var(--mono);
-  font-size: 14px; /* Увеличенный шрифт */
+  font-size: 14px;
   letter-spacing:.08em;
   text-transform:uppercase;
   color: #fff;
-  background: rgba(255, 255, 255, 0.05); /* Отдельные кнопки */
-  padding: 12px 28px; /* Широкие вкладки */
+  background: rgba(255, 255, 255, 0.05);
+  padding: 12px 28px;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(12px);
@@ -187,8 +187,7 @@ form .cta{padding:16px;font-size:13px;border-radius:12px}
   <div class="main-info">
     <span class="tag">/* ПРОФАЙЛ */</span>
     <p>Студент <span>3 курса</span> МГТУ им. Баумана (Факультет <span>ИБМ</span>).</p>
-    <p>Староста группы и основатель студенческого сообщества на 360 человек.</p>
-    <p>В поиске стажировки в <span class="hl">отделе закупок</span>.</p>
+    <p style="margin-bottom: 0;">Староста группы и основатель студенческого сообщества на 360 человек.</p>
   </div>
 
   <div class="marq" aria-hidden="true"><div id="mq"></div></div>
@@ -239,15 +238,20 @@ const V = {
     <a class="card" href="${STAROSTATT}" target="_blank" rel="noopener">
       <h3>StaroSTATT</h3>
       <p>Веб-приложение для старост: журнал посещаемости и смотр куратору в одном окне. Один HTML-файл, вход через Firebase Auth, данные в Firestore.</p>
-      <span class="tag-c">Открыть сайт ↗</span></a>`,
+      <span class="tag-c">Открыть сайт ↗</span>
+    </a>
+    <div class="card">
+      <h3>Цифровая кафедра МГТУ</h3>
+      <p>Направление: Руководитель продукта. Изучение управления IT-продуктами, анализа целевой аудитории, продуктовой аналитики и разработки MVP.</p>
+      <span class="tag-c">Учебный проект</span>
+    </div>`,
   about: `<h2>Обо мне</h2>
     <p>Меня зовут Эмиль Исиев. Я учусь на 3 курсе факультета «Инженерный бизнес и менеджмент» в МГТУ им. Баумана и веду свою группу как староста.</p>
-    <p>Основал студенческое сообщество на 360 человек, поэтому знаю, как собрать людей и довести дело до результата. Сам собрал StaroSTATT, чтобы старостам было проще вести группу. В свободное время монтирую видео.</p>
-    <p>Сейчас ищу стажировку в отделе закупок.</p>`,
+    <p>Основал студенческое сообщество на 360 человек, поэтому знаю, как собрать людей и довести дело до результата. Сам собрал StaroSTATT, чтобы старостам было проще вести группу. В свободное время монтирую видео.</p>`,
   resume: `<h2>Резюме</h2>
     <p><b>Исиев Эмиль Хайдарович.</b> Студент МГТУ им. Баумана, факультет «Инженерный бизнес и менеджмент», специальность «Экономика малого и среднего бизнеса». Староста группы.</p>
     <h3 class="rh">Цель</h3>
-    <p>Стажёр в отделе закупок или другое перспективное и интересное направление для профессионального развития. Готов уделять работе 20 часов в неделю.</p>
+    <p>Перспективное и интересное направление для профессионального развития. Готов уделять работе 20 часов в неделю.</p>
     <h3 class="rh">Управление и организация</h3>
     <p>Староста группы и основатель студенческого сообщества на 360 участников. Работаю в команде, делегирую, расставляю приоритеты и контролирую выполнение задач.</p>
     <h3 class="rh">Подготовка</h3>
@@ -263,7 +267,7 @@ const V = {
     <form id="f">
       <label>Имя<input name="n" required autocomplete="name"></label>
       <label>Почта<input name="e" type="email" required autocomplete="email"></label>
-      <label>О чём речь<select name="t"><option>Веб-проект</option><option>Видеомонтаж</option><option>Стажировка</option><option>Другое</option></select></label>
+      <label>О чём речь<select name="t"><option>Веб-проект</option><option>Видеомонтаж</option><option>Другое</option></select></label>
       <label>Сообщение<textarea name="m" required></textarea></label>
       <button class="cta" type="submit">Отправить сообщение</button>
       <p id="st" role="status"></p>
@@ -357,3 +361,4 @@ document.addEventListener("keydown", e=>{ if(e.key==="Escape") close(); });
 </script>
 </body>
 </html>
+

@@ -20,56 +20,111 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 :focus-visible{outline:2px solid var(--lime);outline-offset:3px}
 #app{position:relative;display:flex;flex-direction:column;height:100%;overflow:hidden;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 #bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ШАПКА */
 header{position:relative;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:20px clamp(16px,4vw,48px)}
 
-/* Обновленный логотип в стиле кодинга */
-.logo{display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:24px;font-weight:500;letter-spacing:0;text-decoration:none}
+/* ЛОГОТИП */
+.logo{display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:24px;font-weight:500;letter-spacing:0;text-decoration:none; position: relative; z-index: 10;}
 .logo span { color: #fff; }
 .logo i{font-style:normal;color:var(--lime);animation:blink 1s step-end infinite;}
 @keyframes blink { 50% { opacity: 0; } }
-.logo:hover { color: var(--lime); }
+.logo:hover { color: var(--lime); text-shadow: 0 0 15px rgba(204,255,0,0.5); }
 .logo:hover span { color: var(--lime); transition: color 0.3s; }
 
-nav{display:flex;align-items:center;gap:clamp(12px,3vw,36px)}
-nav .lnk{display:none;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-nav .lnk:hover{color:var(--lime)}
-@media(min-width:768px){nav .lnk{display:inline}}
-.cta{background:var(--lime);color:#000;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:12px 20px;border-radius:999px;transition:transform .2s}
-.cta:hover{transform:scale(1.05)}
+/* ЦЕНТРАЛЬНАЯ НАВИГАЦИЯ С ПОДСВЕТКОЙ */
+nav{display:none;} /* Скрыто на мобилках */
+@media(min-width:850px){
+  nav{
+    display:flex;
+    align-items:center;
+    gap: 32px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.03);
+    padding: 12px 32px;
+    border-radius: 100px;
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), inset 0 0 20px rgba(255,255,255,0.02);
+  }
+}
+nav .lnk{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted); transition: all 0.3s ease;}
+nav .lnk:hover{
+  color: var(--lime);
+  text-shadow: 0 0 10px var(--lime), 0 0 20px rgba(204,255,0,0.4); /* Эффект свечения */
+  transform: translateY(-2px);
+}
+
+/* КНОПКА СВЯЗИ (Справа) */
+.header-cta { position: relative; z-index: 10; }
+.cta{background:var(--lime);color:#000;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:12px 24px;border-radius:999px;transition:all .3s ease; box-shadow: 0 0 15px rgba(204,255,0,0.2);}
+.cta:hover{transform:scale(1.05) translateY(-2px); box-shadow: 0 10px 25px rgba(204,255,0,0.4);}
+
 main{position:relative;z-index:20;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 16px 4vh}
 h1{font-family:var(--display);font-weight:700;text-transform:uppercase;line-height:.9; pointer-events:none;}
 .t1{display:block;color:transparent;-webkit-text-stroke:1px #fff;font-size:clamp(17px,5.4vw,70px);letter-spacing:.06em}
 @media(min-width:1024px){.t1{-webkit-text-stroke:2px #fff}}
-.t2{display:block;color:var(--lime);font-size:clamp(50px,15vw,180px);min-height:.95em;margin-top:.08em}
+/* Светящийся главный текст */
+.t2{display:block;color:var(--lime);font-size:clamp(50px,15vw,180px);min-height:.95em;margin-top:.08em; text-shadow: 0 0 40px rgba(204,255,0,0.3), 0 0 80px rgba(204,255,0,0.1);}
 
-/* Блок с фото */
+/* БЛОК С ФОТО (Интересные эффекты) */
 .hero{position:absolute;z-index:10;left:50%;top:50%;transform:translate(-50%,-50%);height:62%;max-width:100%;pointer-events:none;-webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 30%,rgba(0,0,0,.55) 60%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 30%,rgba(0,0,0,.55) 60%,transparent 100%)}
 @media(min-width:1024px){.hero{height:78%}}
-.hero img{display:block;height:100%;width:auto;max-width:100vw;object-fit:contain;opacity:0.95; filter:brightness(0.95) contrast(1.1);} /* Убрал блюр и чб, чтобы фото было красивым */
 
-/* Информационная карточка справа */
+/* Эффект левитации для фото */
+.hero img{display:block;height:100%;width:auto;max-width:100vw;object-fit:contain;opacity:0.95; filter:brightness(0.95) contrast(1.1); animation: float 6s ease-in-out infinite;}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* Эффект голографического сканера */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(204, 255, 0, 0.15) 50%, transparent 60%);
+  background-size: 100% 250%;
+  animation: scan 5s linear infinite;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+@keyframes scan {
+  0% { background-position: 0 -100%; }
+  100% { background-position: 0 200%; }
+}
+
+/* ИНФОРМАЦИОННАЯ КАРТОЧКА СПРАВА */
 .hero-info {
   position: absolute;
   right: 0;
   top: 50%;
-  transform: translate(110%, -50%);
-  background: rgba(3, 0, 20, 0.75);
+  transform: translate(120%, -50%);
+  background: rgba(3, 0, 20, 0.6);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-left: 2px solid var(--lime);
   padding: 16px 20px;
   text-align: left;
   font-family: var(--mono);
   display: none;
   min-width: max-content;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  animation: float-delayed 6s ease-in-out infinite; /* Парит вместе с фото, но с задержкой */
 }
-@media(min-width: 900px) {
+@keyframes float-delayed {
+  0%, 100% { transform: translate(120%, -50%); }
+  50% { transform: translate(120%, calc(-50% - 10px)); }
+}
+@media(min-width: 950px) {
   .hero-info { display: block; }
 }
-.hero-info .tag { color: var(--muted); font-size: 11px; margin-bottom: 8px; }
+.hero-info .tag { color: var(--muted); font-size: 11px; margin-bottom: 8px; letter-spacing: 0.1em; }
 .hero-info h4 { font-family: var(--sans); font-size: 16px; font-weight: 600; color: #fff; line-height: 1.4;}
 .hero-info p { font-size: 13px; color: var(--muted); margin-top: 4px; }
-.hero-info .hl { color: var(--lime); }
+.hero-info .hl { color: var(--lime); text-shadow: 0 0 8px rgba(204,255,0,0.5); }
 
 #mono{display:none;font-family:var(--display);font-weight:700;font-size:min(62vh,80vw);line-height:.8;letter-spacing:-.02em;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.12);white-space:nowrap;padding-bottom:4vh;user-select:none}
 .marq{position:absolute;z-index:30;left:0;right:0;bottom:0;overflow:hidden;white-space:nowrap;pointer-events:none;padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -84,14 +139,14 @@ aside.on{transform:none;visibility:visible}
 .dh button:hover{color:var(--lime)}
 .db{padding:16px 24px calc(48px + env(safe-area-inset-bottom,0px))}
 .menu button{display:block;width:100%;text-align:left;font-family:var(--display);font-weight:700;font-size:clamp(36px,8vw,64px);text-transform:uppercase;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08);transition:color .2s,padding-left .2s}
-.menu button:hover{color:var(--lime);padding-left:12px}
+.menu button:hover{color:var(--lime);padding-left:12px; text-shadow: 0 0 20px rgba(204,255,0,0.3);}
 .db h2{font-family:var(--display);font-size:clamp(32px,7vw,52px);text-transform:uppercase;margin-bottom:20px}
 .db p{line-height:1.65;color:rgba(255,255,255,.85);margin-bottom:14px;max-width:60ch}
 .rh{font-family:var(--display);font-weight:500;font-size:22px;text-transform:uppercase;letter-spacing:.04em;color:var(--lime);margin:26px 0 8px}
 .db p a{color:var(--lime)}
 #st{margin:0;font-size:14px;color:var(--muted)}
-.card{display:block;text-decoration:none;border:1px solid rgba(255,255,255,.15);padding:20px;margin-bottom:16px;transition:border-color .2s}
-.card:hover{border-color:var(--lime)}
+.card{display:block;text-decoration:none;border:1px solid rgba(255,255,255,.15);padding:20px;margin-bottom:16px;transition:all .3s}
+.card:hover{border-color:var(--lime); box-shadow: 0 0 20px rgba(204,255,0,0.1);}
 .card h3{font-family:var(--display);font-size:26px;text-transform:uppercase;margin-bottom:8px}
 .card p{margin:0 0 12px;color:var(--muted)}
 .tag{font-family:var(--mono);font-size:12px;color:var(--lime)}
@@ -104,24 +159,29 @@ input:focus,textarea:focus,select:focus{border-color:var(--lime)}
 textarea{resize:vertical;min-height:96px}
 select option{background:var(--drawer)}
 form .cta{padding:16px;font-size:13px;border-radius:0}
-@media(prefers-reduced-motion:reduce){.marq div{animation:none}aside{transition:none}.logo i{transition:none}}
+@media(prefers-reduced-motion:reduce){.marq div{animation:none}aside{transition:none}.logo i{transition:none} .hero img, .hero-info, .hero::after {animation:none;}}
 </style>
 </head>
 <body>
 <div id="app">
   <canvas id="bg" aria-hidden="true"></canvas>
   <header>
-    <!-- Измененный логотип в стиле кодинга -->
+    <!-- Логотип слева -->
     <a class="logo" href="#" aria-label="Эмиль Исиев">
       <span>&lt;I/E&gt;</span><i aria-hidden="true">_</i>
     </a>
+    
+    <!-- Навигация по центру -->
     <nav>
-      <!-- "Проекты" заменены на "Портфолио" -->
       <button class="lnk" data-open="projects">Портфолио</button>
       <button class="lnk" data-open="resume">Резюме</button>
       <button class="lnk" data-open="about">Обо мне</button>
-      <button class="cta" data-open="menu" aria-haspopup="dialog">Связаться</button>
     </nav>
+
+    <!-- Кнопка справа (на мобилках открывает меню) -->
+    <div class="header-cta">
+      <button class="cta" data-open="menu" aria-haspopup="dialog">Связаться</button>
+    </div>
   </header>
 
   <main>
@@ -129,11 +189,11 @@ form .cta{padding:16px;font-size:13px;border-radius:0}
   </main>
 
   <div class="hero">
-    <!-- Вставлено твое фото из Телеграма -->
+    <!-- Твоё фото -->
     <img src="telegram-cloud-photo-size-2-5220104291400490716-y.jpg" alt="Эмиль Исиев" onerror="this.style.display='none';document.getElementById('mono').style.display='block'">
     <div id="mono" aria-hidden="true">ЭИ</div>
     
-    <!-- Добавленный блок с информацией справа -->
+    <!-- Инфо-карточка -->
     <div class="hero-info">
       <div class="tag">/* ОБРАЗОВАНИЕ */</div>
       <h4>МГТУ им. Баумана</h4>

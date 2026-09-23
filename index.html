@@ -30,19 +30,14 @@ nav .lnk:hover{color:var(--lime)}
 @media(min-width:768px){nav .lnk{display:inline}}
 .cta{background:var(--lime);color:#000;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:12px 20px;border-radius:999px;transition:transform .2s}
 .cta:hover{transform:scale(1.05)}
-main{position:relative;z-index:20;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 16px 12vh}
+main{position:relative;z-index:20;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 16px 4vh}
 h1{font-family:var(--display);font-weight:700;text-transform:uppercase;line-height:.9}
 .t1{display:block;color:transparent;-webkit-text-stroke:1px #fff;font-size:clamp(17px,5.4vw,70px);letter-spacing:.06em}
 @media(min-width:1024px){.t1{-webkit-text-stroke:2px #fff}}
 .t2{display:block;color:var(--lime);font-size:clamp(50px,15vw,180px);min-height:.95em;margin-top:.08em}
-.bio{max-width:640px;margin-top:clamp(12px,2.5vh,28px);font-size:clamp(14px,1.6vw,18px);line-height:1.55;color:rgba(255,255,255,.88);text-shadow:0 2px 12px #030014}
-.bio span{display:inline-block;opacity:0;animation:pop .05s forwards}
-.bio span.sp{width:.28em}
-@keyframes pop{to{opacity:1}}
-.hero{position:absolute;z-index:10;left:50%;bottom:0;transform:translateX(-50%);height:52%;max-width:100%;pointer-events:none}
-@media(min-width:1024px){.hero{height:66%}}
-.hero img{height:100%;width:auto;max-width:100vw;object-fit:contain;filter:brightness(.95) grayscale(1) contrast(1.25) drop-shadow(0 25px 50px rgba(0,0,0,.5));transition:transform .7s ease-out;pointer-events:auto}
-.hero img:hover{transform:scale(1.04)}
+.hero{position:absolute;z-index:10;left:50%;top:50%;transform:translate(-50%,-50%);height:62%;max-width:100%;pointer-events:none;-webkit-mask-image:radial-gradient(ellipse 50% 52% at 50% 48%,#000 22%,rgba(0,0,0,.55) 55%,transparent 100%);mask-image:radial-gradient(ellipse 50% 52% at 50% 48%,#000 22%,rgba(0,0,0,.55) 55%,transparent 100%)}
+@media(min-width:1024px){.hero{height:78%}}
+.hero img{display:block;height:100%;width:auto;max-width:100vw;object-fit:contain;opacity:.85;filter:brightness(.95) grayscale(1) contrast(1.25) blur(2px)}
 #mono{display:none;font-family:var(--display);font-weight:700;font-size:min(62vh,80vw);line-height:.8;letter-spacing:-.02em;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.12);white-space:nowrap;padding-bottom:4vh;user-select:none}
 .marq{position:absolute;z-index:30;left:0;right:0;bottom:0;overflow:hidden;white-space:nowrap;pointer-events:none;padding-bottom:env(safe-area-inset-bottom,0px)}
 .marq div{display:inline-block;font-family:var(--display);font-weight:700;font-size:clamp(60px,12vw,160px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.15);animation:mq 30s linear infinite}
@@ -60,6 +55,8 @@ aside.on{transform:none;visibility:visible}
 .db h2{font-family:var(--display);font-size:clamp(32px,7vw,52px);text-transform:uppercase;margin-bottom:20px}
 .db p{line-height:1.65;color:rgba(255,255,255,.85);margin-bottom:14px;max-width:60ch}
 .rh{font-family:var(--display);font-weight:500;font-size:22px;text-transform:uppercase;letter-spacing:.04em;color:var(--lime);margin:26px 0 8px}
+.db p a{color:var(--lime)}
+#st{margin:0;font-size:14px;color:var(--muted)}
 .card{display:block;text-decoration:none;border:1px solid rgba(255,255,255,.15);padding:20px;margin-bottom:16px;transition:border-color .2s}
 .card:hover{border-color:var(--lime)}
 .card h3{font-family:var(--display);font-size:26px;text-transform:uppercase;margin-bottom:8px}
@@ -74,7 +71,7 @@ input:focus,textarea:focus,select:focus{border-color:var(--lime)}
 textarea{resize:vertical;min-height:96px}
 select option{background:var(--drawer)}
 form .cta{padding:16px;font-size:13px;border-radius:0}
-@media(prefers-reduced-motion:reduce){.marq div{animation:none}aside{transition:none}.logo i,.hero img{transition:none}}
+@media(prefers-reduced-motion:reduce){.marq div{animation:none}aside{transition:none}.logo i{transition:none}}
 </style>
 </head>
 <body>
@@ -92,7 +89,6 @@ form .cta{padding:16px;font-size:13px;border-radius:0}
 
   <main>
     <h1><span class="t1">Привет, я Эмиль. Я</span><span class="t2" id="word" aria-live="off">СТАРОСТА</span></h1>
-    <p class="bio" id="bio"></p>
   </main>
 
   <div class="hero">
@@ -112,10 +108,12 @@ form .cta{padding:16px;font-size:13px;border-radius:0}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* ---------- НАСТРОЙКИ ---------- */
-const EMAIL = "your@email.com"; // ← замените на свою почту
+const EMAIL = "isievemil@gmail.com";
+const TG = "qwerlode";
+// Чтобы форма отправляла письма сама, вставьте ключ с web3forms.com (бесплатно). Пока ключа нет, форма открывает почтовое приложение.
+const FORM_KEY = "";
 const STAROSTATT = "https://wft9dnv8m5-cmd.github.io/StaroSTATT/";
-const WORDS = ["СТАРОСТА","ОРГАНИЗАТОР","МЕНЕДЖЕР"];
-const BIO = "Эмиль Исиев, 3 курс МГТУ им. Баумана. Организую людей и процессы, основал студенческое сообщество на 360 участников, ищу стажировку в закупках.";
+const WORDS = ["СТАРОСТА","МОНТАЖЁР","СТАЖЁР","ВАЙБКОДЕР"];
 
 /* ---------- Бегущая строка ---------- */
 const unit = "ЭМИЛЬ ИСИЕВ // МГТУ ИМ. БАУМАНА // ИБМ // ";
@@ -132,14 +130,6 @@ function scramble(target){
   }, 40);
 }
 setInterval(()=>{ wi=(wi+1)%WORDS.length; scramble(WORDS[wi]); }, 4000);
-
-/* ---------- Typewriter ---------- */
-const bio = document.getElementById("bio");
-function type(){
-  bio.innerHTML = [...BIO].map((c,i)=>`<span class="${c===" "?"sp":""}" style="animation-delay:${i*20}ms">${c===" "?"&nbsp;":c}</span>`).join("");
-}
-type(); setInterval(type, 7000);
-bio.setAttribute("aria-label", BIO);
 
 /* ---------- Drawer ---------- */
 const drawer = document.getElementById("drawer"), veil = document.getElementById("veil"),
@@ -172,12 +162,14 @@ const V = {
     <h3 class="rh">Компьютеры и творчество</h3>
     <p>Уверенный пользователь ПК, понимаю устройство железа и компьютерных систем. Умею монтировать видео и работать в графических редакторах.</p>`,
   contact: `<h2>Давайте работать</h2>
+    <p>Напишите напрямую: <a href="mailto:${EMAIL}">${EMAIL}</a> или в Telegram <a href="https://t.me/${TG}" target="_blank" rel="noopener">@${TG}</a>. Либо заполните форму.</p>
     <form id="f">
       <label>Имя<input name="n" required autocomplete="name"></label>
       <label>Почта<input name="e" type="email" required autocomplete="email"></label>
       <label>О чём речь<select name="t"><option>Веб-проект</option><option>Видеомонтаж</option><option>Стажировка</option><option>Другое</option></select></label>
       <label>Сообщение<textarea name="m" required></textarea></label>
       <button class="cta" type="submit">Отправить сообщение</button>
+      <p id="st" role="status"></p>
     </form>`
 };
 let view = "menu", last;
@@ -186,8 +178,21 @@ function show(v){
   backBtn.textContent = v === "menu" ? "Меню" : "← Назад";
   backBtn.style.visibility = v === "menu" ? "hidden" : "visible";
   const f = document.getElementById("f");
-  if(f) f.onsubmit = e => { e.preventDefault(); const d = new FormData(f);
-    location.href = `mailto:${EMAIL}?subject=${encodeURIComponent("Портфолио: "+d.get("t"))}&body=${encodeURIComponent(d.get("m")+"\n\n"+d.get("n")+", "+d.get("e"))}`; };
+  if(f) f.onsubmit = async e => {
+    e.preventDefault(); const d = new FormData(f), st = document.getElementById("st"), subject = "Портфолио: " + d.get("t");
+    if(FORM_KEY){
+      st.textContent = "Отправляю…";
+      try{
+        const r = await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
+          body:JSON.stringify({access_key:FORM_KEY,subject,name:d.get("n"),email:d.get("e"),message:d.get("m")})});
+        if(!(await r.json()).success) throw 0;
+        st.textContent = "Сообщение отправлено, спасибо!"; f.reset();
+      }catch{ st.textContent = "Не удалось отправить. Напишите на " + EMAIL + " или в Telegram @" + TG + "."; }
+    } else {
+      location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(d.get("m")+"\n\n"+d.get("n")+", "+d.get("e"))}`;
+      st.textContent = "Открываю почтовое приложение с готовым письмом.";
+    }
+  };
 }
 function open(v){ last = document.activeElement; show(v); drawer.classList.add("on"); veil.classList.add("on"); drawer.focus(); }
 function close(){ drawer.classList.remove("on"); veil.classList.remove("on"); last && last.focus(); }

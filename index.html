@@ -21,9 +21,15 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 #app{position:relative;display:flex;flex-direction:column;height:100%;overflow:hidden;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 #bg{position:fixed;inset:0;z-index:0;pointer-events:none}
 header{position:relative;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:20px clamp(16px,4vw,48px)}
-.logo{display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:24px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none}
-.logo i{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--lime);color:#000;font-style:normal;font-size:18px;transition:transform .5s}
-.logo:hover i{transform:rotate(180deg)}
+
+/* Обновленный логотип в стиле кодинга */
+.logo{display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:24px;font-weight:500;letter-spacing:0;text-decoration:none}
+.logo span { color: #fff; }
+.logo i{font-style:normal;color:var(--lime);animation:blink 1s step-end infinite;}
+@keyframes blink { 50% { opacity: 0; } }
+.logo:hover { color: var(--lime); }
+.logo:hover span { color: var(--lime); transition: color 0.3s; }
+
 nav{display:flex;align-items:center;gap:clamp(12px,3vw,36px)}
 nav .lnk{display:none;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 nav .lnk:hover{color:var(--lime)}
@@ -31,13 +37,40 @@ nav .lnk:hover{color:var(--lime)}
 .cta{background:var(--lime);color:#000;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:12px 20px;border-radius:999px;transition:transform .2s}
 .cta:hover{transform:scale(1.05)}
 main{position:relative;z-index:20;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 16px 4vh}
-h1{font-family:var(--display);font-weight:700;text-transform:uppercase;line-height:.9}
+h1{font-family:var(--display);font-weight:700;text-transform:uppercase;line-height:.9; pointer-events:none;}
 .t1{display:block;color:transparent;-webkit-text-stroke:1px #fff;font-size:clamp(17px,5.4vw,70px);letter-spacing:.06em}
 @media(min-width:1024px){.t1{-webkit-text-stroke:2px #fff}}
 .t2{display:block;color:var(--lime);font-size:clamp(50px,15vw,180px);min-height:.95em;margin-top:.08em}
-.hero{position:absolute;z-index:10;left:50%;top:50%;transform:translate(-50%,-50%);height:62%;max-width:100%;pointer-events:none;-webkit-mask-image:radial-gradient(ellipse 50% 52% at 50% 48%,#000 22%,rgba(0,0,0,.55) 55%,transparent 100%);mask-image:radial-gradient(ellipse 50% 52% at 50% 48%,#000 22%,rgba(0,0,0,.55) 55%,transparent 100%)}
+
+/* Блок с фото */
+.hero{position:absolute;z-index:10;left:50%;top:50%;transform:translate(-50%,-50%);height:62%;max-width:100%;pointer-events:none;-webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 30%,rgba(0,0,0,.55) 60%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 30%,rgba(0,0,0,.55) 60%,transparent 100%)}
 @media(min-width:1024px){.hero{height:78%}}
-.hero img{display:block;height:100%;width:auto;max-width:100vw;object-fit:contain;opacity:.85;filter:brightness(.95) grayscale(1) contrast(1.25) blur(2px)}
+.hero img{display:block;height:100%;width:auto;max-width:100vw;object-fit:contain;opacity:0.95; filter:brightness(0.95) contrast(1.1);} /* Убрал блюр и чб, чтобы фото было красивым */
+
+/* Информационная карточка справа */
+.hero-info {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(110%, -50%);
+  background: rgba(3, 0, 20, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 2px solid var(--lime);
+  padding: 16px 20px;
+  text-align: left;
+  font-family: var(--mono);
+  display: none;
+  min-width: max-content;
+}
+@media(min-width: 900px) {
+  .hero-info { display: block; }
+}
+.hero-info .tag { color: var(--muted); font-size: 11px; margin-bottom: 8px; }
+.hero-info h4 { font-family: var(--sans); font-size: 16px; font-weight: 600; color: #fff; line-height: 1.4;}
+.hero-info p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.hero-info .hl { color: var(--lime); }
+
 #mono{display:none;font-family:var(--display);font-weight:700;font-size:min(62vh,80vw);line-height:.8;letter-spacing:-.02em;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.12);white-space:nowrap;padding-bottom:4vh;user-select:none}
 .marq{position:absolute;z-index:30;left:0;right:0;bottom:0;overflow:hidden;white-space:nowrap;pointer-events:none;padding-bottom:env(safe-area-inset-bottom,0px)}
 .marq div{display:inline-block;font-family:var(--display);font-weight:700;font-size:clamp(60px,12vw,160px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.15);animation:mq 30s linear infinite}
@@ -78,9 +111,13 @@ form .cta{padding:16px;font-size:13px;border-radius:0}
 <div id="app">
   <canvas id="bg" aria-hidden="true"></canvas>
   <header>
-    <a class="logo" href="#" aria-label="Эмиль Исиев"><span>Isiev</span><i aria-hidden="true">✦</i></a>
+    <!-- Измененный логотип в стиле кодинга -->
+    <a class="logo" href="#" aria-label="Эмиль Исиев">
+      <span>&lt;I/E&gt;</span><i aria-hidden="true">_</i>
+    </a>
     <nav>
-      <button class="lnk" data-open="projects">Проекты</button>
+      <!-- "Проекты" заменены на "Портфолио" -->
+      <button class="lnk" data-open="projects">Портфолио</button>
       <button class="lnk" data-open="resume">Резюме</button>
       <button class="lnk" data-open="about">Обо мне</button>
       <button class="cta" data-open="menu" aria-haspopup="dialog">Связаться</button>
@@ -92,8 +129,17 @@ form .cta{padding:16px;font-size:13px;border-radius:0}
   </main>
 
   <div class="hero">
-    <img src="photo.webp" alt="Эмиль Исиев" onerror="this.style.display='none';document.getElementById('mono').style.display='block'">
+    <!-- Вставлено твое фото из Телеграма -->
+    <img src="telegram-cloud-photo-size-2-5220104291400490716-y.jpg" alt="Эмиль Исиев" onerror="this.style.display='none';document.getElementById('mono').style.display='block'">
     <div id="mono" aria-hidden="true">ЭИ</div>
+    
+    <!-- Добавленный блок с информацией справа -->
+    <div class="hero-info">
+      <div class="tag">/* ОБРАЗОВАНИЕ */</div>
+      <h4>МГТУ им. Баумана</h4>
+      <p>Факультет <span class="hl">ИБМ</span></p>
+      <p>Студент & Староста</p>
+    </div>
   </div>
 
   <div class="marq" aria-hidden="true"><div id="mq"></div></div>
@@ -110,7 +156,6 @@ form .cta{padding:16px;font-size:13px;border-radius:0}
 /* ---------- НАСТРОЙКИ ---------- */
 const EMAIL = "isievemil@gmail.com";
 const TG = "qwerlode";
-// Чтобы форма отправляла письма сама, вставьте ключ с web3forms.com (бесплатно). Пока ключа нет, форма открывает почтовое приложение.
 const FORM_KEY = "";
 const STAROSTATT = "https://wft9dnv8m5-cmd.github.io/StaroSTATT/";
 const WORDS = ["СТАРОСТА","МОНТАЖЁР","СТАЖЁР","ВАЙБКОДЕР"];
@@ -136,9 +181,9 @@ const drawer = document.getElementById("drawer"), veil = document.getElementById
       body = document.getElementById("dbody"), backBtn = document.getElementById("back");
 const V = {
   menu: `<div class="menu">
-    <button data-go="projects">Проекты</button><button data-go="about">Обо мне</button>
+    <button data-go="projects">Портфолио</button><button data-go="about">Обо мне</button>
     <button data-go="resume">Резюме</button><button data-go="contact">Давайте работать</button></div>`,
-  projects: `<h2>Проекты</h2>
+  projects: `<h2>Портфолио</h2>
     <a class="card" href="${STAROSTATT}" target="_blank" rel="noopener">
       <h3>StaroSTATT</h3>
       <p>Веб-приложение для старост: журнал посещаемости и смотр куратору в одном окне. Один HTML-файл, вход через Firebase Auth, данные в Firestore.</p>

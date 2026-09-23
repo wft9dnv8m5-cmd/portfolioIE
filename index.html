@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Эмиль Исиев — портфолио</title>
+<meta name="description" content="Эмиль Исиев, студент МГТУ им. Баумана (ИБМ), староста и организатор. Ищет стажировку в отделе закупок.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{--bg:#030014;--drawer:#333;--lime:#CCFF00;--muted:rgba(255,255,255,.6);
+--display:"Oswald","Impact","Arial Black",sans-serif;--sans:"Inter",system-ui,sans-serif;--mono:"IBM Plex Mono",Consolas,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:#fff;font-family:var(--sans);overflow:hidden}
+::selection{background:var(--lime);color:#000}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+#app{position:relative;display:flex;flex-direction:column;height:100%;overflow:hidden;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+header{position:relative;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:20px clamp(16px,4vw,48px)}
+.logo{display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:24px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none}
+.logo i{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--lime);color:#000;font-style:normal;font-size:18px;transition:transform .5s}
+.logo:hover i{transform:rotate(180deg)}
+nav{display:flex;align-items:center;gap:clamp(12px,3vw,36px)}
+nav .lnk{display:none;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+nav .lnk:hover{color:var(--lime)}
+@media(min-width:768px){nav .lnk{display:inline}}
+.cta{background:var(--lime);color:#000;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:12px 20px;border-radius:999px;transition:transform .2s}
+.cta:hover{transform:scale(1.05)}
+main{position:relative;z-index:20;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 16px 12vh}
+h1{font-family:var(--display);font-weight:700;text-transform:uppercase;line-height:.9}
+.t1{display:block;color:transparent;-webkit-text-stroke:1px #fff;font-size:clamp(17px,5.4vw,70px);letter-spacing:.06em}
+@media(min-width:1024px){.t1{-webkit-text-stroke:2px #fff}}
+.t2{display:block;color:var(--lime);font-size:clamp(50px,15vw,180px);min-height:.95em;margin-top:.08em}
+.bio{max-width:640px;margin-top:clamp(12px,2.5vh,28px);font-size:clamp(14px,1.6vw,18px);line-height:1.55;color:rgba(255,255,255,.88);text-shadow:0 2px 12px #030014}
+.bio span{display:inline-block;opacity:0;animation:pop .05s forwards}
+.bio span.sp{width:.28em}
+@keyframes pop{to{opacity:1}}
+.hero{position:absolute;z-index:10;left:50%;bottom:0;transform:translateX(-50%);height:52%;max-width:100%;pointer-events:none}
+@media(min-width:1024px){.hero{height:66%}}
+.hero img{height:100%;width:auto;max-width:100vw;object-fit:contain;filter:brightness(.95) grayscale(1) contrast(1.25) drop-shadow(0 25px 50px rgba(0,0,0,.5));transition:transform .7s ease-out;pointer-events:auto}
+.hero img:hover{transform:scale(1.04)}
+#mono{display:none;font-family:var(--display);font-weight:700;font-size:min(62vh,80vw);line-height:.8;letter-spacing:-.02em;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.12);white-space:nowrap;padding-bottom:4vh;user-select:none}
+.marq{position:absolute;z-index:30;left:0;right:0;bottom:0;overflow:hidden;white-space:nowrap;pointer-events:none;padding-bottom:env(safe-area-inset-bottom,0px)}
+.marq div{display:inline-block;font-family:var(--display);font-weight:700;font-size:clamp(60px,12vw,160px);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.15);animation:mq 30s linear infinite}
+@keyframes mq{to{transform:translateX(-50%)}}
+#veil{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .3s}
+#veil.on{opacity:1;pointer-events:auto}
+aside{position:fixed;z-index:50;top:0;right:0;height:100%;width:100%;max-width:42rem;background:var(--drawer);border-left:1px solid rgba(255,255,255,.05);transform:translateX(100%);transition:transform .55s cubic-bezier(.22,1.2,.36,1);overflow-y:auto;visibility:hidden}
+aside.on{transform:none;visibility:visible}
+.dh{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;padding:calc(16px + env(safe-area-inset-top,0px)) 24px 16px;background:rgba(51,51,51,.9);backdrop-filter:blur(8px);z-index:2}
+.dh button{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:8px 4px}
+.dh button:hover{color:var(--lime)}
+.db{padding:16px 24px calc(48px + env(safe-area-inset-bottom,0px))}
+.menu button{display:block;width:100%;text-align:left;font-family:var(--display);font-weight:700;font-size:clamp(36px,8vw,64px);text-transform:uppercase;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08);transition:color .2s,padding-left .2s}
+.menu button:hover{color:var(--lime);padding-left:12px}
+.db h2{font-family:var(--display);font-size:clamp(32px,7vw,52px);text-transform:uppercase;margin-bottom:20px}
+.db p{line-height:1.65;color:rgba(255,255,255,.85);margin-bottom:14px;max-width:60ch}
+.rh{font-family:var(--display);font-weight:500;font-size:22px;text-transform:uppercase;letter-spacing:.04em;color:var(--lime);margin:26px 0 8px}
+.card{display:block;text-decoration:none;border:1px solid rgba(255,255,255,.15);padding:20px;margin-bottom:16px;transition:border-color .2s}
+.card:hover{border-color:var(--lime)}
+.card h3{font-family:var(--display);font-size:26px;text-transform:uppercase;margin-bottom:8px}
+.card p{margin:0 0 12px;color:var(--muted)}
+.tag{font-family:var(--mono);font-size:12px;color:var(--lime)}
+.row{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.row b{font-family:var(--mono);font-weight:400;font-size:12px;color:var(--muted);min-width:96px;padding-top:3px}
+form{display:grid;gap:22px;margin-top:8px}
+label{display:grid;gap:6px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+input,textarea,select{width:100%;background:transparent;color:#fff;border:0;border-bottom:1px solid #fff;padding:10px 0;font:16px var(--sans);border-radius:0;outline:0;transition:border-color .2s}
+input:focus,textarea:focus,select:focus{border-color:var(--lime)}
+textarea{resize:vertical;min-height:96px}
+select option{background:var(--drawer)}
+form .cta{padding:16px;font-size:13px;border-radius:0}
+@media(prefers-reduced-motion:reduce){.marq div{animation:none}aside{transition:none}.logo i,.hero img{transition:none}}
+</style>
+</head>
+<body>
+<div id="app">
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <header>
+    <a class="logo" href="#" aria-label="Эмиль Исиев"><span>Isiev</span><i aria-hidden="true">✦</i></a>
+    <nav>
+      <button class="lnk" data-open="projects">Проекты</button>
+      <button class="lnk" data-open="resume">Резюме</button>
+      <button class="lnk" data-open="about">Обо мне</button>
+      <button class="cta" data-open="menu" aria-haspopup="dialog">Связаться</button>
+    </nav>
+  </header>
+
+  <main>
+    <h1><span class="t1">Привет, я Эмиль. Я</span><span class="t2" id="word" aria-live="off">СТАРОСТА</span></h1>
+    <p class="bio" id="bio"></p>
+  </main>
+
+  <div class="hero">
+    <img src="photo.webp" alt="Эмиль Исиев" onerror="this.style.display='none';document.getElementById('mono').style.display='block'">
+    <div id="mono" aria-hidden="true">ЭИ</div>
+  </div>
+
+  <div class="marq" aria-hidden="true"><div id="mq"></div></div>
+</div>
+
+<div id="veil"></div>
+<aside id="drawer" role="dialog" aria-modal="true" aria-label="Меню" tabindex="-1">
+  <div class="dh"><button id="back">Меню</button><button id="close" aria-label="Закрыть">Закрыть ✕</button></div>
+  <div class="db" id="dbody"></div>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ---------- НАСТРОЙКИ ---------- */
+const EMAIL = "your@email.com"; // ← замените на свою почту
+const STAROSTATT = "https://wft9dnv8m5-cmd.github.io/StaroSTATT/";
+const WORDS = ["СТАРОСТА","ОРГАНИЗАТОР","МЕНЕДЖЕР"];
+const BIO = "Эмиль Исиев, 3 курс МГТУ им. Баумана. Организую людей и процессы, основал студенческое сообщество на 360 участников, ищу стажировку в закупках.";
+
+/* ---------- Бегущая строка ---------- */
+const unit = "ЭМИЛЬ ИСИЕВ // МГТУ ИМ. БАУМАНА // ИБМ // ";
+document.getElementById("mq").textContent = unit.repeat(6);
+
+/* ---------- Scramble ---------- */
+const word = document.getElementById("word"), CH = "АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЭЮЯ";
+let wi = 0, timer;
+function scramble(target){
+  clearInterval(timer); let f = 0;
+  timer = setInterval(()=>{
+    word.textContent = [...target].map((c,i)=> i < f/3 ? c : CH[Math.floor(Math.random()*CH.length)]).join("");
+    if(++f > target.length*3){ clearInterval(timer); word.textContent = target; }
+  }, 40);
+}
+setInterval(()=>{ wi=(wi+1)%WORDS.length; scramble(WORDS[wi]); }, 4000);
+
+/* ---------- Typewriter ---------- */
+const bio = document.getElementById("bio");
+function type(){
+  bio.innerHTML = [...BIO].map((c,i)=>`<span class="${c===" "?"sp":""}" style="animation-delay:${i*20}ms">${c===" "?"&nbsp;":c}</span>`).join("");
+}
+type(); setInterval(type, 7000);
+bio.setAttribute("aria-label", BIO);
+
+/* ---------- Drawer ---------- */
+const drawer = document.getElementById("drawer"), veil = document.getElementById("veil"),
+      body = document.getElementById("dbody"), backBtn = document.getElementById("back");
+const V = {
+  menu: `<div class="menu">
+    <button data-go="projects">Проекты</button><button data-go="about">Обо мне</button>
+    <button data-go="resume">Резюме</button><button data-go="contact">Давайте работать</button></div>`,
+  projects: `<h2>Проекты</h2>
+    <a class="card" href="${STAROSTATT}" target="_blank" rel="noopener">
+      <h3>StaroSTATT</h3>
+      <p>Веб-приложение для старост: журнал посещаемости и смотр куратору в одном окне. Один HTML-файл, вход через Firebase Auth, данные в Firestore.</p>
+      <span class="tag">Открыть сайт ↗</span></a>`,
+  about: `<h2>Обо мне</h2>
+    <p>Меня зовут Эмиль Исиев. Я учусь на 3 курсе факультета «Инженерный бизнес и менеджмент» в МГТУ им. Баумана и веду свою группу как староста.</p>
+    <p>Основал студенческое сообщество на 360 человек, поэтому знаю, как собрать людей и довести дело до результата. Сам собрал StaroSTATT, чтобы старостам было проще вести группу. В свободное время монтирую видео.</p>
+    <p>Сейчас ищу стажировку в отделе закупок.</p>`,
+  resume: `<h2>Резюме</h2>
+    <p><b>Исиев Эмиль Хайдарович.</b> Студент МГТУ им. Баумана, факультет «Инженерный бизнес и менеджмент», специальность «Экономика малого и среднего бизнеса». Староста группы.</p>
+    <h3 class="rh">Цель</h3>
+    <p>Стажёр в отделе закупок или другое перспективное и интересное направление для профессионального развития. Готов уделять работе 20 часов в неделю.</p>
+    <h3 class="rh">Управление и организация</h3>
+    <p>Староста группы и основатель студенческого сообщества на 360 участников. Работаю в команде, делегирую, расставляю приоритеты и контролирую выполнение задач.</p>
+    <h3 class="rh">Подготовка</h3>
+    <p>Прошёл курс «Руководитель продукта» на Цифровой Кафедре МГТУ им. Баумана.</p>
+    <h3 class="rh">Программирование и автоматизация</h3>
+    <p>Базовый уровень: Python, HTML, CSS, SQL, BPMN, 1С, 1С:ERP, Jira.</p>
+    <h3 class="rh">Работа с данными и документами</h3>
+    <p>Уверенно работаю в Microsoft Office (Excel, Word, PowerPoint) и Google Sheets. Использую ИИ-инструменты, чтобы быстрее решать рабочие задачи.</p>
+    <h3 class="rh">Компьютеры и творчество</h3>
+    <p>Уверенный пользователь ПК, понимаю устройство железа и компьютерных систем. Умею монтировать видео и работать в графических редакторах.</p>`,
+  contact: `<h2>Давайте работать</h2>
+    <form id="f">
+      <label>Имя<input name="n" required autocomplete="name"></label>
+      <label>Почта<input name="e" type="email" required autocomplete="email"></label>
+      <label>О чём речь<select name="t"><option>Веб-проект</option><option>Видеомонтаж</option><option>Стажировка</option><option>Другое</option></select></label>
+      <label>Сообщение<textarea name="m" required></textarea></label>
+      <button class="cta" type="submit">Отправить сообщение</button>
+    </form>`
+};
+let view = "menu", last;
+function show(v){
+  view = v; body.innerHTML = V[v]; drawer.scrollTop = 0;
+  backBtn.textContent = v === "menu" ? "Меню" : "← Назад";
+  backBtn.style.visibility = v === "menu" ? "hidden" : "visible";
+  const f = document.getElementById("f");
+  if(f) f.onsubmit = e => { e.preventDefault(); const d = new FormData(f);
+    location.href = `mailto:${EMAIL}?subject=${encodeURIComponent("Портфолио: "+d.get("t"))}&body=${encodeURIComponent(d.get("m")+"\n\n"+d.get("n")+", "+d.get("e"))}`; };
+}
+function open(v){ last = document.activeElement; show(v); drawer.classList.add("on"); veil.classList.add("on"); drawer.focus(); }
+function close(){ drawer.classList.remove("on"); veil.classList.remove("on"); last && last.focus(); }
+document.addEventListener("click", e=>{
+  const o = e.target.closest("[data-open]"), g = e.target.closest("[data-go]");
+  if(o) open(o.dataset.open); else if(g) show(g.dataset.go);
+});
+backBtn.onclick = ()=>show("menu");
+document.getElementById("close").onclick = close; veil.onclick = close;
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") close(); });
+
+/* ---------- Three.js: частицы и линии ---------- */
+(function(){
+  const cv = document.getElementById("bg");
+  const r = new THREE.WebGLRenderer({canvas:cv, antialias:false, alpha:true});
+  r.setPixelRatio(Math.min(devicePixelRatio,1.5));
+  const scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(60,1,1,300); cam.position.z = 50;
+  const N = 15000, pos = new Float32Array(N*3), org = new Float32Array(N*3), vel = new Float32Array(N*3), col = new Float32Array(N*3);
+  const base = new THREE.Color(0x001f3f), lime = new THREE.Color(0xCCFF00), tmp = new THREE.Color();
+  for(let i=0;i<N;i++){
+    const x=(Math.random()-.5)*220, y=(Math.random()-.5)*130, z=(Math.random()-.5)*80;
+    org.set([x,y,z],i*3); pos.set([x,y,z],i*3); col.set([base.r,base.g,base.b],i*3);
+  }
+  const pg = new THREE.BufferGeometry();
+  pg.setAttribute("position", new THREE.BufferAttribute(pos,3));
+  pg.setAttribute("color", new THREE.BufferAttribute(col,3));
+  const pm = new THREE.PointsMaterial({size:.5, vertexColors:true, transparent:true, opacity:.7, blending:THREE.AdditiveBlending, depthWrite:false});
+  scene.add(new THREE.Points(pg,pm));
+
+  const L = 530, lp = new Float32Array(L*6);
+  for(let i=0;i<L;i++){ const x=(Math.random()-.5)*240,y=(Math.random()-.5)*140,z=-150+Math.random()*200,len=6+Math.random()*14;
+    lp.set([x,y,z,x,y,z+len],i*6); }
+  const lg = new THREE.BufferGeometry(); lg.setAttribute("position", new THREE.BufferAttribute(lp,3));
+  const lm = new THREE.LineBasicMaterial({color:0x88aaff, transparent:true, opacity:.2});
+  scene.add(new THREE.LineSegments(lg,lm));
+
+  const m = new THREE.Vector3(9999,9999,0), ray = new THREE.Vector3();
+  addEventListener("pointermove", e=>{
+    ray.set(e.clientX/innerWidth*2-1, -(e.clientY/innerHeight)*2+1, .5).unproject(cam).sub(cam.position).normalize();
+    m.copy(cam.position).addScaledVector(ray, -cam.position.z/ray.z);
+  });
+  function fit(){ r.setSize(innerWidth,innerHeight,false); cam.aspect=innerWidth/innerHeight; cam.updateProjectionMatrix(); }
+  addEventListener("resize", fit); fit();
+
+  const R = 20, still = matchMedia("(prefers-reduced-motion:reduce)").matches;
+  (function loop(){
+    requestAnimationFrame(loop);
+    for(let i=0;i<N;i++){
+      const j=i*3, dx=pos[j]-m.x, dy=pos[j+1]-m.y, d=Math.hypot(dx,dy);
+      if(d<R && d>.001){ const f=(R-d)*.04/d; vel[j]+=dx*f; vel[j+1]+=dy*f; }
+      for(let k=0;k<3;k++){ vel[j+k]+=(org[j+k]-pos[j+k])*.02; vel[j+k]*=.9; pos[j+k]+=vel[j+k]; }
+      const t = d<R ? (1-d/R)*.4 : 0;
+      tmp.copy(base).lerp(lime,t); col[j]=tmp.r; col[j+1]=tmp.g; col[j+2]=tmp.b;
+    }
+    pg.attributes.position.needsUpdate = pg.attributes.color.needsUpdate = true;
+    if(!still){
+      for(let i=0;i<L;i++){ const j=i*6; lp[j+2]+=.25; lp[j+5]+=.25;
+        if(lp[j+2]>60){ const d=lp[j+5]-lp[j+2]; lp[j+2]=-150; lp[j+5]=-150+d; } }
+      lg.attributes.position.needsUpdate = true;
+    }
+    r.render(scene,cam);
+  })();
+  addEventListener("pagehide", ()=>{ pg.dispose(); pm.dispose(); lg.dispose(); lm.dispose(); r.dispose(); });
+})();
+</script>
+</body>
+</html>
